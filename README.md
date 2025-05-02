@@ -14,7 +14,7 @@ This will create the image `docker-mcp-server:latest` in your local repository.
 
 We provide a shell script that start up the image, `start-mcp-servers`. You may then call that script from anywhere, this will be easiest if you add it to your `PATH` but you don't have to.
 
-    cd ~/path/to/healthmatters
+    cd ~/path/to/your-project
     ~/source/repos/docker-mcp-servers/start-mcp-servers
 
 The script will map the current directory into the `/project` directory in the container. From the point of view of the tools that use the `STDIO` protocol, your project will be in the `/project` directory.
@@ -29,9 +29,7 @@ In addition to the MCP servers we also project an inspector tool running on port
 
 * [http://localhost:6274/](http://localhost:6274/)
 
-To keep things simple we've included scripts for the tools at the root of the image, that is, to run the Git MCP tool the command is `./git-mcp`. To see what tools the Git MCP server provides you'd select "STDIO" as the transport type in the upper-left and then type "./git-mcp" into the "Command" field and then press the "Connect" button. The list of tools should then be displayed in the middle column, selecting any tool from that middle column will let you add arguments and invoke it in the third column.
-
-We also provide a proxy that will wrap tools that use standard IO so that they will work more easily from tools like Cursor. For the tools in this project that use STDIO (like the Git tool) we are have a proxy configured and running in the container.
+We also provide a proxy that will wrap tools that use standard IO so that they will work more easily from tools like Cursor.
 
 ### Configuring Cursor
 
