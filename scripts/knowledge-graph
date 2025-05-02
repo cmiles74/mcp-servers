@@ -1,0 +1,2 @@
+#!/bin/bash
+npx -y @modelcontextprotocol/server-memory --memory-path=/memory/memory.jsonl

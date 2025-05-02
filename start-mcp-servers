@@ -1,2 +1,9 @@
 #!/bin/bash
-docker run -it --rm -p 6274:6274 -p 6277:6277 -p 9099:9099 -p 9098:9098 -p 9097:9097 -v ./:/project --env-file ./.env --name mcp-servers docker-mcp-servers:latest
+mkdir -p .memory
+touch .memory/memory.jsonl
+docker run -it --rm \
+       -p 6274:6274 -p 6277:6277 -p 9099:9099 -p 9098:9098 -p 9097:9097 -p 9096:9096 \
+       -v ./:/project -v ./.memory:/memory \
+       -e MEMORY_FILE_PATH=./.memory \
+       --env-file ./.env \
+       --name mcp-servers docker-mcp-servers:latest

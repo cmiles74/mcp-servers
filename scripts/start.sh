@@ -7,6 +7,8 @@ export PATH="$PATH:./git-mcp"
 
 /root/.local/bin/mcp-proxy --sse-port 9097 --sse-host 0.0.0.0 --pass-environment /ddg-mcp &
 
+/root/.local/bin/mcp-proxy --sse-port 9096 --sse-host 0.0.0.0 --pass-environment /knowledge-graph &
+
 npx -y @modelcontextprotocol/inspector &
 BGPID_INSP=$!
 

@@ -5,6 +5,7 @@ This project provides a Docker container image that includes several MCP servers
 * [Git repository, with history](https://github.com/cyanheads/git-mcp-server)
 * [PostgreSQL Database server](https://github.com/cyanheads/git-mcp-server)
 * [Internet Search](https://github.com/nickclyde/duckduckgo-mcp-server)
+* [Remember stuff between sessions](https://github.com/shaneholloman/mcp-knowledge-graph)
 
 ## Building the Image
 
@@ -44,21 +45,28 @@ You may replace it with the configuration below or add the servers below to your
 ```json
 {
   "mcpServers": {
-      "git": {
-          "type": "sse",
-          "url": "http://localhost:9099/sse"
-      },
-      "postgres": {
-          "type": "sse",
-          "url": "http://localhost:9098/sse"
+    "git": {
+      "type": "sse",
+      "url": "http://localhost:9099/sse"
+    },
+    "postgres": {
+      "type": "sse",
+      "url": "http://localhost:9098/sse"
     },
     "ddg-search": {
       "type": "sse",
       "url": "http://localhost:9097/sse"
+    },
+    "knowledge-graph": {
+      "type": "sse",
+      "url": "http://localhost:9096/sse"
     }
   }
 }
 ```
+
+You may also setup a set of "rules" that will be provided to the LLM along with every request. These rules may be used to steer the LLM, you might add some information about these MCP tools so that you don't need to include it in every prompt. We've included a sample rule set to get you started.
+* [Sample Cursor Rules](rules-example.md)
 
 ### Tool Notes
 

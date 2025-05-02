@@ -45,5 +45,7 @@ EXPOSE 9098
 # Duck Duck Go MCP server
 EXPOSE 9097
 
+# Memory server
+EXPOSE 9096
 
 ENTRYPOINT ./start.sh
