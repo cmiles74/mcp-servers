@@ -25,6 +25,9 @@ RUN npm run build
 COPY ./config/git-mcp-server/env ./.env
 WORKDIR /
 
+# install DuckDuckGo MCP server
+RUN uv pip install duckduckgo-mcp-server
+
 COPY /scripts/* .
 
 # MCP Proxy
@@ -38,6 +41,9 @@ EXPOSE 6277
 
 # PostgreSQL MCP server
 EXPOSE 9098
-EXPOSE 8000
+
+# Duck Duck Go MCP server
+EXPOSE 9097
+
 
 ENTRYPOINT ./start.sh

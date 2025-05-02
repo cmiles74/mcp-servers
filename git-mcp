@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run --rm -v ./project:/project docker-mcp-servers:latest bash

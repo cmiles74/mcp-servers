@@ -1,6 +1,10 @@
 # MCP Servers
 
-This project provides a Docker container image that includes several MCP servers that might be useful to a variety of projects. This is early days for this project and not all of these servers have been thoroughly tested, use with caution. 🧯
+This project provides a Docker container image that includes several MCP servers that might be useful to a variety of projects. This is early days for this project and not all of these servers have been thoroughly tested, use with caution. 🧯 Right now the following functionality is provided...
+
+* [Git repository, with history](https://github.com/cyanheads/git-mcp-server)
+* [PostgreSQL Database server](https://github.com/cyanheads/git-mcp-server)
+* [Internet Search](https://github.com/nickclyde/duckduckgo-mcp-server)
 
 ## Building the Image
 
@@ -47,6 +51,10 @@ You may replace it with the configuration below or add the servers below to your
       "postgres": {
           "type": "sse",
           "url": "http://localhost:9098/sse"
+    },
+    "ddg-search": {
+      "type": "sse",
+      "url": "http://localhost:9097/sse"
     }
   }
 }
