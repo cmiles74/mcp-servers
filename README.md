@@ -19,6 +19,10 @@ We provide a shell script that start up the image, `start-mcp-servers`. You may 
 
 The script will map the current directory into the `/project` directory in the container. From the point of view of the tools that use the `STDIO` protocol, your project will be in the `/project` directory.
 
+Lastly, the start script will name the container "mcp-servers". This makes it easy to call out and run commands inside the running container. To get a shell in the running container, you could...
+
+    docker exec -it mcp-servers bash
+
 ## Tools Provided
 
 In addition to the MCP servers we also project an inspector tool running on port 6274. You may use this tool to see what tools the MCP servers are providing. Once the container is started you can interact with the inspector at...
@@ -41,7 +45,11 @@ You may replace it with the configuration below or add the servers below to your
       "git": {
           "type": "sse",
           "url": "http://localhost:9099/sse"
-      }
+      },
+      "postgres": {
+          "type": "sse",
+          "url": "http://localhost:9098/sse"
+    }
   }
 }
 ```
@@ -58,3 +66,14 @@ The Git MCP server is configured such that the directory from which you start th
 
 This works okay but I suspect it could be better. If you think of a smoother way to map the project in, please submit a PR!
 
+#### PostgreSQL
+
+When you run `start-mcp-servers` in your project directory the `.env` file at the root of that directory will be read. The PostgreSQL MCP server is looking for a connection string in an environment variable named `MCP_DATABASE_URI`, this is what it will use to connect to your database. Since we're running the tool in a Docker container the database hostname needs to point to your local machine, "host.docker.internal".
+
+    MCP_DATABASE_URI=postgresql://DB_ACCOUNT:DB_PASSWORD@host.docker.internal:5432/DB_NAME
+
+There's a sample in the `env-sample` folder. You will want to either create a `.env` file for your project if it doesn't have one or add this new variable to the bottom. You can then start the MCP servers and it will pickup that connection string and connect to your database.
+
+You may have to remind the LLM that the tool for working with the database is present, I found a prompt that starts with something like the snipped below works well.
+
+> There are a lot of tables in this project, you can use the "postgres" MCP tool to view them. Most of our tables are in the "kipu_demo_development" schema.

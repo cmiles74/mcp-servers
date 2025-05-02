@@ -1,15 +1,15 @@
-FROM ubuntu:rolling
-RUN apt update
+FROM crystaldba/postgres-mcp
 
-# install Git
+# Install Git and curl
+RUN apt update
 RUN apt install -yqq git curl
 
-# install Python uv
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
 # install NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_22.x -o /tmp/nodesource_setup.sh | bash
-RUN apt install -yqq nodejs npm
+RUN curl -sL https://deb.nodesource.com/setup_22.x | bash
+RUN apt update
+RUN apt install -yqq nodejs
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # install MCP proxy
 RUN uv tool install mcp-proxy
@@ -35,5 +35,9 @@ EXPOSE 6274
 
 # MCP Inspector Proxy Server
 EXPOSE 6277
+
+# PostgreSQL MCP server
+EXPOSE 9098
+EXPOSE 8000
 
 ENTRYPOINT ./start.sh

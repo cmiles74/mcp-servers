@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -it --rm -p 6274:6274 -p 6277:6277 -p 9099:9099 -v ./:/project --name mcp-servers docker-mcp-servers:latest
+docker run -it --rm -p 6274:6274 -p 6277:6277 -p 9099:9099 -p 9098:9098 -v ./:/project --env-file ./.env --name mcp-servers docker-mcp-servers:latest

@@ -1,11 +1,14 @@
 #!/bin/bash
-trap 'kill $BGPID; exit' 0
+trap 'kill $BGPID_INSP; kill $BGPID_PGSQL; exit' 0
 
 export PATH="$PATH:./git-mcp"
 
 /root/.local/bin/mcp-proxy --sse-port 9099 --sse-host 0.0.0.0 --pass-environment /git-mcp &
+
 npx -y @modelcontextprotocol/inspector &
-BGPID=$!
-echo "MCP Inspector running with PID $BGPID"
+BGPID_INSP=$!
+
+postgres-mcp --access-mode=unrestricted --transport=sse --sse-host=0.0.0.0 --sse-port=9098 $MCP_DATABASE_URI &
+BGPID_PGSQL=$!
 
 wait
