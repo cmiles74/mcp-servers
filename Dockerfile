@@ -19,7 +19,7 @@ RUN npm install -g @modelcontextprotocol/inspector
 
 # install Git MCP Server
 RUN git clone https://github.com/cyanheads/git-mcp-server.git
-WORKDIR git-mcp-server
+WORKDIR /git-mcp-server
 RUN npm install
 RUN npm run build
 COPY ./config/git-mcp-server/env ./.env
@@ -48,4 +48,4 @@ EXPOSE 9097
 # Memory server
 EXPOSE 9096
 
-ENTRYPOINT ./start.sh
+ENTRYPOINT ["./start.sh"]
