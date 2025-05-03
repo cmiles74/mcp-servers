@@ -90,4 +90,4 @@ There's a sample in the `env-sample` folder. You will want to either create a `.
 
 You may have to remind the LLM that the tool for working with the database is present, I found a prompt that starts with something like the snipped below works well.
 
-> There are a lot of tables in this project, you can use the "postgres" MCP tool to view them. Most of our tables are in the "kipu_demo_development" schema.
+> There are a lot of tables in this project, you can use the "postgres" MCP tool to view them. Most of our tables are in the "super_interesting" schema.
