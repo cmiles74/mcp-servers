@@ -3,6 +3,8 @@ trap 'kill $BGPID_INSP; kill $BGPID_PGSQL; exit' 0
 
 export PATH="$PATH:./git-mcp"
 
+git config --global --add safe.directory /project
+
 /root/.local/bin/mcp-proxy --sse-port 9099 --sse-host 0.0.0.0 --pass-environment /git-mcp &
 
 /root/.local/bin/mcp-proxy --sse-port 9097 --sse-host 0.0.0.0 --pass-environment /ddg-mcp &
