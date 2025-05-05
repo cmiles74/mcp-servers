@@ -7,9 +7,28 @@ This project provides a Docker container image that includes several MCP servers
 * [Internet Search](https://github.com/nickclyde/duckduckgo-mcp-server)
 * [Remember stuff between sessions](https://github.com/shaneholloman/mcp-knowledge-graph)
 
+## Use the Published Image
+
+The easiest thing to do is to pull and run the published image. Navigate to the directory of the project you'd like to work with and run the following Docker command.
+
+```shell
+docker run -it --rm \
+       -p 6274:6274 -p 6277:6277 -p 9099:9099 -p 9098:9098 -p 9097:9097 -p 9096:9096 \
+       -v ./:/project -v ./.memory:/memory \
+       -e MEMORY_FILE_PATH=./.memory \
+       --add-host=host.docker.internal:host-gateway \
+       --env-file ./.env \
+       --name mcp-servers ghcr.io/cmiles74/docker-mcp-servers:latest
+```
+
+We map the ports that provide the MCP servers we'd like to expose to Cursor as well as the two ports used by the MCP server inspection tool. We map in our project and set the path for the LLM to store it's "memory" (a JSON file of data). We read in the project's `.env` file to get a connection string to the database and then we start up the container with the MCP servers.
+
+You can find this script as well as another for Podman in the [`scripts` directory](scripts).
+
+
 ## Building the Image
 
-We have a script to build the image, it should run without issue.
+You can also check-out the project and build the image locally it should run without issue.
 
     ./build.sh
 
