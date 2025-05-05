@@ -10,10 +10,8 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-        with:
-          sparse-checkout: .
       - name: Build image
-        run: docker build -t docker-mcp-servers:${{ github.event.release.tag_name }} -t docker-mcp-servers:latest .
+        run: docker build -t ghcr.io/cmiles74/docker-mcp-servers:${{ github.event.release.tag_name }} -t ghcr.io/cmiles74/docker-mcp-servers:latest .
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -24,4 +22,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: docker push ghcr.io/cmiles74/docker-mcp-servers:${{ github.event.release.tag_name }}
+        run: docker push ghcr.io/cmiles74/docker-mcp-servers:${{ github.event.release.tag_name }}; docker push ghcr.io/cmiles74/docker-mcp-servers:latest

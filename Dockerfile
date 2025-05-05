@@ -19,10 +19,10 @@ RUN npm install -g @modelcontextprotocol/inspector
 
 # install Git MCP Server
 RUN git clone https://github.com/cyanheads/git-mcp-server.git
+COPY /config/git-mcp-server/env /git-mcp-server/.env
 WORKDIR /git-mcp-server
 RUN npm install
 RUN npm run build
-COPY ./config/git-mcp-server/env ./.env
 WORKDIR /
 
 # install DuckDuckGo MCP server
